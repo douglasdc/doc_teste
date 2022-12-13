@@ -1,0 +1,89 @@
+---
+title: API v3
+---
+
+# API v3
+
+Welcome to the Huggy API. With it, you can manage all agents, contacts and serve your customers, send and receive messages. This API allows you to programmatically perform actions on your company account.
+
+Our API natively supports the format:
+
+- REST
+
+  The system should make a request for the URL https://api.huggy.app/v3, sending the parameters by GET, POST, PUT or DELETE. For each request, the response will be a JSON object, which is detailed throughout this documentation.
+
+## Authentication
+
+### Authentication through Huggy Panel
+
+For the API activation, you must have to activate the default company app in Developers section in Huggy platform and do the authentication through a authorization structure for get the API, [`OAuth2.0`](https://tools.ietf.org/html/rfc6749). The Authentication through Huggy Panel the app activation gives automatic access for the oauth credentials, that are a client_id and a client_secret, that will be used to extract your account token.
+
+### App sections
+
+#### Basic Informations
+
+![Basic Informations](~assets/auth/basic-information-en.png)
+In this section, you can put a `Name` and a `Description` for the app, both can be updated at any time.
+
+<hr />
+
+#### OAuth 2.0 Authentication
+
+![OAuth 2.0 Authentication](~assets/auth/auth-oauth-en.png)  
+In this section you can set up a callback URL. You also can view the `client_id` and the `client_secret`, that was generated automatically when you created the app in Huggy platform.
+
+<hr />
+
+#### Redirect URL
+
+- **`callback url`**
+  - Consists in a url that the Huggy platform will return to your app the requested authorization.
+
+#### OAuth credentials
+
+- **`client_id`**
+  - It’s the way that the Huggy API will be identify your app.
+- **`client_secret`**
+  - It’s known and used only by the app and the authorization server.
+    <hr />
+
+### Authentication Steps
+
+#### Steps 1:
+
+- Create an app in Huggy platform [`Huggy`](https://www.huggy.app)
+
+#### Steps 2:
+
+- Override the parameters `redirect_uri` and `client_id` in the url below.
+
+  - **scope:** It's the API scope access (resources);
+  - **response_type:** It’s the expected answer. The code sent for the callback url;
+  - **redirect_uri:** It’s the callback url configured in the app;
+  - **client_id:** It’s the app’s id;
+
+#### Steps 3:
+
+- Logged in Huggy platform, you have to access the informed uri with the described information on the previous step. If all steps are completed, so the authorization interface will be shown.
+
+![OAuth 2.0 Authentication](~assets/auth/authorization-en.png)
+
+#### Steps 4:
+
+- Grant app usage permission
+
+#### Steps 5:
+
+- After clicking in “Authorize”, we will send the code to the callback url.
+
+> **Nota:** The code that was sent to the callback url must be used only once. If you need to generate the access_token again, all the steps, starting with step 2, needs to be repeated.
+
+#### Steps 6:
+
+- To extract the `access_token` and the `refresh_token`, you have to send a request with the following parameters:
+
+https://auth.huggy.app/oauth/access_token
+
+### Practical solution
+
+Check out a [practical solution](https://spotlight.huggy.io/publications/autentique-a-api-da-huggy?utm_source=developers&utm_medium=API_v3&utm_campaign=SPOT_Developers&utm_term=hyperlink&utm_content=exemplos_praticos) that allows you to perform the authentication process using a customized and intuitive interface.
